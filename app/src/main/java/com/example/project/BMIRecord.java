@@ -1,10 +1,10 @@
 package com.example.project;
 
 public class BMIRecord {
-    private String weight;
-    private String height;
-    private String bmi;
-    private String date;
+    private final String weight;
+    private final String height;
+    private final String bmi;
+    private final String date;
 
     public BMIRecord(String weight, String height, String bmi, String date) {
         this.weight = weight;
