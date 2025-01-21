@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 int userId = user.getUserId();
 
                 // Do something with the data, such as navigating to another screen
-                Intent intent = new Intent(this, HomeActivity.class);
+                Intent intent = new Intent(this, MainActivity2.class);
                 intent.putExtra("userId", userId);
                 startActivity(intent);
             }else {
