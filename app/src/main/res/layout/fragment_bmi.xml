@@ -102,7 +102,7 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 android:layout_marginBottom="8dp"
-                android:backgroundTint="@color/design_default_color_primary">
+                android:backgroundTint="#8355ad">
 
                 <TextView
                     android:id="@+id/tv_bmi_info_title"
