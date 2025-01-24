@@ -47,7 +47,6 @@ public class BMIFragment extends Fragment {
         tvBmiResult = view.findViewById(R.id.tv_bmi_result);
         btnCalculateBmi = view.findViewById(R.id.btn_calculate_bmi);
         tvBmiInfoTitle = view.findViewById(R.id.tv_bmi_info_title);
-        layoutBmiInfoContent = view.findViewById(R.id.layout_bmi_info_content);
 
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.recycler_view);
@@ -64,20 +63,7 @@ public class BMIFragment extends Fragment {
         // Set button click listener
         btnCalculateBmi.setOnClickListener(v -> calculateBMI());
 
-        // Set up BMI info expand/collapse functionality
-        setupExpandableBmiInfo();
-
         return view;
-    }
-
-    private void setupExpandableBmiInfo() {
-        tvBmiInfoTitle.setOnClickListener(v -> {
-            if (layoutBmiInfoContent.getVisibility() == View.GONE) {
-                layoutBmiInfoContent.setVisibility(View.VISIBLE); // Expand
-            } else {
-                layoutBmiInfoContent.setVisibility(View.GONE); // Collapse
-            }
-        });
     }
 
     private void showDatePickerDialog() {
@@ -131,8 +117,9 @@ public class BMIFragment extends Fragment {
 
             // Add the result to the RecyclerView
             BMIRecord newRecord = new BMIRecord(weightStr, heightStr, bmiResult, dateStr);
-            bmiRecords.add(newRecord);
-            bmiAdapter.notifyItemInserted(bmiRecords.size() - 1);
+            bmiRecords.add(0,newRecord);
+            bmiAdapter.notifyItemInserted(0);
+            recyclerView.scrollToPosition(0);
 
         } catch (NumberFormatException e) {
             Toast.makeText(getContext(), "Invalid input format. Please enter numbers only.", Toast.LENGTH_SHORT).show();

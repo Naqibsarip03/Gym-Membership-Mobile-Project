@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- BMI Calculator Title -->
     <TextView
         android:id="@+id/tv_bmi_title"
         android:layout_width="match_parent"
@@ -16,6 +17,7 @@
         android:gravity="center"
         android:paddingBottom="16dp" />
 
+    <!-- Weight Input -->
     <EditText
         android:id="@+id/et_weight"
         android:layout_width="match_parent"
@@ -24,6 +26,7 @@
         android:inputType="numberDecimal"
         android:padding="8dp" />
 
+    <!-- Height Input -->
     <EditText
         android:id="@+id/et_height"
         android:layout_width="match_parent"
@@ -32,6 +35,7 @@
         android:inputType="numberDecimal"
         android:padding="8dp" />
 
+    <!-- Date Picker -->
     <EditText
         android:id="@+id/et_date"
         android:layout_width="match_parent"
@@ -41,6 +45,7 @@
         android:clickable="true"
         android:padding="8dp" />
 
+    <!-- Calculate Button -->
     <Button
         android:id="@+id/btn_calculate_bmi"
         android:layout_width="match_parent"
@@ -48,6 +53,7 @@
         android:text="Calculate BMI"
         android:layout_marginTop="16dp" />
 
+    <!-- BMI Result -->
     <TextView
         android:id="@+id/tv_bmi_result"
         android:layout_width="match_parent"
@@ -57,6 +63,7 @@
         android:gravity="center"
         android:padding="16dp" />
 
+    <!-- RecyclerView for BMI Records -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
@@ -64,124 +71,129 @@
         android:layout_marginTop="16dp"
         android:nestedScrollingEnabled="false"
         android:overScrollMode="never"
-        android:maxHeight="200dp"
         android:scrollbars="vertical"
         android:paddingTop="16dp" />
 
-    <!-- Adjusted BMI Scale Section with increased margin top -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" /> <!-- Filler space -->
+
+    <!-- BMI Scale Information Section -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_bmi_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_margin="8dp"
         app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
+        app:cardElevation="8dp"
         android:background="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <!-- Title (Clickable for Expand/Collapse) -->
-            <TextView
-                android:id="@+id/tv_bmi_info_title"
+            <!-- BMI Scale Information Title with Rounded Corners -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="BMI Scale Information"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:padding="16dp"
-                android:background="@color/design_default_color_primary"
-                android:textColor="@android:color/white"
-                android:gravity="center_vertical" />
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/design_default_color_primary">
 
-            <!-- Expandable Section -->
+                <TextView
+                    android:id="@+id/tv_bmi_info_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="BMI Scale Information"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Underweight Indicator -->
             <LinearLayout
-                android:id="@+id/layout_bmi_info_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"
-                android:padding="16dp">
+                android:orientation="horizontal"
+                android:paddingTop="8dp">
 
-                <!-- Underweight Indicator -->
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="#FFEB3B" />
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:text="Underweight: &lt; 18.5"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
-                    <View
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="#FFEB3B" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Underweight: &lt; 18.5"
-                        android:textSize="16sp" />
-                </LinearLayout>
+            <!-- Normal Indicator -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp">
 
-                <!-- Normal Indicator -->
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="#4CAF50" />
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:text="Normal: 18.5 - 24.9"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
-                    <View
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="#4CAF50" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Normal: 18.5 - 24.9"
-                        android:textSize="16sp" />
-                </LinearLayout>
+            <!-- Overweight Indicator -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp">
 
-                <!-- Overweight Indicator -->
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="#FF9800" />
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:text="Overweight: 25 - 29.9"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
-                    <View
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="#FF9800" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Overweight: 25 - 29.9"
-                        android:textSize="16sp" />
-                </LinearLayout>
+            <!-- Obese Indicator -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp">
 
-                <!-- Obese Indicator -->
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="#F44336" />
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="8dp">
-
-                    <View
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="#F44336" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Obese: &gt; 30"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                    android:text="Obese: &gt; 30"
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+
 
 </LinearLayout>

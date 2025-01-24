@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,7 @@ public class BMIAdapter extends RecyclerView.Adapter<BMIAdapter.BMIViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull BMIViewHolder holder, int position) {
+        holder.itemView.setBackgroundColor(Color.WHITE); // Reset background color
         BMIRecord record = bmiRecords.get(position);
 
         holder.tvWeight.setText("Weight: " + record.getWeight() + " kg");
@@ -47,6 +49,27 @@ public class BMIAdapter extends RecyclerView.Adapter<BMIAdapter.BMIViewHolder> {
         } else {
             holder.tvBmi.setTextColor(Color.RED); // Obese
         }
+
+        // Long click to delete the record
+        holder.itemView.setOnLongClickListener(v -> {
+            int adapterPosition = holder.getAdapterPosition();
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                // Change background color temporarily to show effect
+                v.setBackgroundColor(Color.LTGRAY);
+
+                // Use postDelayed to allow the user to see the visual effect
+                v.postDelayed(() -> {
+                    // Remove the item from the list
+                    bmiRecords.remove(adapterPosition);
+                    // Notify the adapter that an item was removed
+                    notifyItemRemoved(adapterPosition);
+                    // Optionally, show a toast message
+                    Toast.makeText(v.getContext(), "BMI Record Deleted", Toast.LENGTH_SHORT).show();
+                }, 300); // Delay for 300ms to show the visual effect
+            }
+            return true; // Return true to indicate the click was handled
+        });
+
     }
 
     @Override
