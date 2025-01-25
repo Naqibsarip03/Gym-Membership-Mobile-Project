@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="@drawable/payment_item_background"
+    android:layout_margin="8dp"
+    android:elevation="4dp">
+
+    <!-- User Name -->
+    <TextView
+        android:id="@+id/userNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="User Name"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingEnd="8dp" />
+
+    <!-- Payment Amount -->
+    <TextView
+        android:id="@+id/paymentAmountTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Amount: $0.00"
+        android:textSize="14sp"
+        android:paddingEnd="8dp" />
+
+    <!-- Payment Status -->
+    <TextView
+        android:id="@+id/paymentStatusTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Status: Pending"
+        android:textSize="14sp"
+        android:paddingEnd="8dp" />
+
+    <!-- Expiration Date -->
+    <TextView
+        android:id="@+id/expirationDateTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Expires: N/A"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <!-- Approve Button -->
+    <Button
+        android:id="@+id/approveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Approve"
+        />
+</LinearLayout>
