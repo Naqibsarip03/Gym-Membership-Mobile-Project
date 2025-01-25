@@ -6,13 +6,83 @@
     android:orientation="vertical">
 
     <!-- Content Container for the Fragments -->
+
+    <!-- Bottom Navigation View -->
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
 
-    <!-- Bottom Navigation View -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#03A9F4">
+
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="170dp"
+            app:srcCompat="@drawable/gym" />
+
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="220dp"
+            android:layout_marginTop="230dp"
+            android:text="Phone"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="220dp"
+            android:layout_marginTop="270dp"
+            android:text="Email"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="220dp"
+            android:layout_marginTop="190dp"
+            android:text="Name"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="175dp"
+            android:layout_marginTop="270dp"
+            app:srcCompat="@drawable/email" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="175dp"
+            android:layout_marginTop="230dp"
+            app:srcCompat="@drawable/phone" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="175dp"
+            android:layout_marginTop="190dp"
+            app:srcCompat="@drawable/user" />
+
+    </FrameLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
