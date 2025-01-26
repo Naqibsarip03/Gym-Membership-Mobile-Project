@@ -12,12 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import com.example.project.BMI_DATABASE.BMIDao;
+
 public class BMIAdapter extends RecyclerView.Adapter<BMIAdapter.BMIViewHolder> {
 
     private final List<BMIRecord> bmiRecords;
+    private final BMIDao bmiDao; // Add BMIDao reference
 
-    public BMIAdapter(List<BMIRecord> bmiRecords) {
+    public BMIAdapter(List<BMIRecord> bmiRecords, BMIDao bmiDao) {
         this.bmiRecords = bmiRecords;
+        this.bmiDao = bmiDao; // Initialize BMIDao
     }
 
     @NonNull
@@ -57,6 +61,9 @@ public class BMIAdapter extends RecyclerView.Adapter<BMIAdapter.BMIViewHolder> {
                 // Change background color temporarily to show effect
                 v.setBackgroundColor(Color.LTGRAY);
 
+                // Remove the record from the database
+                bmiDao.delete(record); // Delete the record from the database
+
                 // Use postDelayed to allow the user to see the visual effect
                 v.postDelayed(() -> {
                     // Remove the item from the list
@@ -69,7 +76,6 @@ public class BMIAdapter extends RecyclerView.Adapter<BMIAdapter.BMIViewHolder> {
             }
             return true; // Return true to indicate the click was handled
         });
-
     }
 
     @Override
@@ -88,4 +94,10 @@ public class BMIAdapter extends RecyclerView.Adapter<BMIAdapter.BMIViewHolder> {
             tvDate = itemView.findViewById(R.id.tv_date);
         }
     }
+
+    public void addBMIRecord(BMIRecord newRecord) {
+        bmiRecords.add(0, newRecord); // Add to the top of the list
+        notifyItemInserted(0); // Notify that the item was inserted at position 0
+    }
+
 }

@@ -20,6 +20,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project.BMI_DATABASE.DatabaseClient;
+import com.example.project.BMI_DATABASE.BMIDatabase;
+import com.example.project.BMI_DATABASE.BMIDao;
+
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -34,6 +39,8 @@ public class BMIFragment extends Fragment {
     private TextView tvBmiResult, tvBmiInfoTitle;
     private LinearLayout layoutBmiInfoContent;
     private Button btnCalculateBmi;
+    private BMIDao bmiDao;
+
 
     @Nullable
     @Override
@@ -52,9 +59,12 @@ public class BMIFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Initialize sample data (or start with an empty list)
-        bmiRecords = new ArrayList<>();
-        bmiAdapter = new BMIAdapter(bmiRecords);
+        // Initialize DAO
+        bmiDao = DatabaseClient.getInstance(getContext()).getDatabase().bmiDao();
+
+        // Load data from database and update adapter
+        bmiRecords = bmiDao.getAllRecords(); // Retrieve from database
+        bmiAdapter = new BMIAdapter(bmiRecords, bmiDao); // Pass bmiDao to adapter
         recyclerView.setAdapter(bmiAdapter);
 
         // Set up date picker
@@ -98,6 +108,7 @@ public class BMIFragment extends Fragment {
             return;
         }
 
+        BMIRecord newRecord = null;
         try {
             // Parse weight and height
             double weight = Double.parseDouble(weightStr);
@@ -115,10 +126,17 @@ public class BMIFragment extends Fragment {
             // Display the BMI result
             tvBmiResult.setText("Your BMI: " + bmiResult);
 
-            // Add the result to the RecyclerView
-            BMIRecord newRecord = new BMIRecord(weightStr, heightStr, bmiResult, dateStr);
-            bmiRecords.add(0,newRecord);
-            bmiAdapter.notifyItemInserted(0);
+            // Save the result in the database
+            newRecord = new BMIRecord(weightStr, heightStr, bmiResult, dateStr);
+            bmiDao.insert(newRecord); // Save to database
+
+            // Add the new record at the top of the list
+            bmiRecords.add(0, newRecord); // Insert at position 0 (top)
+
+            // Notify the adapter that the new record has been added at the top
+            bmiAdapter.notifyItemInserted(0); // Insert at position 0 (top)
+
+            // Scroll to the top to show the latest record
             recyclerView.scrollToPosition(0);
 
         } catch (NumberFormatException e) {
